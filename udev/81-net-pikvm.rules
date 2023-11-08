@@ -1,0 +1,9 @@
+SUBSYSTEMS=="usb", ATTRS{idVendor}!="1d6b", ATTRS{idProduct}!="0104", ATTRS{manufacturer}!="PiKVM", GOTO="pikvm_net_end"
+SUBSYSTEMS=="usb", DRIVERS=="rndis_host", GOTO="pikvm_net_rename"
+SUBSYSTEMS=="usb", DRIVERS=="cdc_ncm", GOTO="pikvm_net_rename"
+GOTO="pikvm_net_end"
+
+LABEL="pikvm_net_rename"
+SUBSYSTEMS=="net", ACTION=="add", NAME="pikvm0"
+
+LABEL="pikvm_net_end"
